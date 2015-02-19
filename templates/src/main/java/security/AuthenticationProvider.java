@@ -1,3 +1,6 @@
+<%
+  if(authenticationType == 'xauth') {
+%>
 package <%=packageName%>.security;
 
 import org.slf4j.Logger;
@@ -52,3 +55,7 @@ public class AuthenticationProvider implements org.springframework.security.auth
                 .class.equals(authentication);
     }
 }
+
+<%
+  }
+%>

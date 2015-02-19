@@ -1,3 +1,6 @@
+<%
+  if(hibernateCache == "ehcache") {
+%>
 <?xml version="1.0" encoding="UTF-8"?>
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
@@ -37,3 +40,7 @@
            timeToLiveSeconds="3600">
     </cache>
 </ehcache>
+
+<%
+  }
+%>

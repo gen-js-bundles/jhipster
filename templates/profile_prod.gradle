@@ -1,3 +1,6 @@
+<%
+  if(buildTool === "gradle") {
+%>
 apply plugin: 'spring-boot'
 apply plugin: 'com.moowork.node'
 <% if(frontendBuilder == 'grunt') {%>
@@ -33,3 +36,7 @@ processResources.dependsOn gulp_build
 test.dependsOn gulp_test
 bootRun.dependsOn gulp_test
 <% } %>
+
+<%
+  }
+%>

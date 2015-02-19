@@ -1,3 +1,6 @@
+<%
+  if(hibernateCache == "hazelcast") {
+%>
 package <%=packageName%>.config.hazelcast;
 
 import com.hazelcast.core.HazelcastInstance;
@@ -99,3 +102,7 @@ public class HazelcastCacheRegionFactory implements RegionFactory {
         return HazelcastTimestamper.nextTimestamp(hazelcastInstance);
     }
 }
+
+<%
+  }
+%>

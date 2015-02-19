@@ -1,3 +1,6 @@
+<%
+  if(databaseType == 'mongodb' &&  authenticationType == 'oauth2') {
+%>
 package <%=packageName%>.domain;
 
 import org.springframework.data.annotation.Id;
@@ -86,3 +89,7 @@ public class OAuth2AuthenticationAccessToken implements Serializable {
         return id != null ? id.hashCode() : 0;
     }
 }
+
+<%
+  }
+%>

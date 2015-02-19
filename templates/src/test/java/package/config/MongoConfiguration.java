@@ -1,3 +1,6 @@
+<%
+  if(databaseType == "mongodb") {
+%>
 package <%=packageName%>.config;
 
 import com.mongodb.Mongo;
@@ -32,3 +35,7 @@ public class MongoConfiguration {
         }
     }
 }
+
+<%
+  }
+%>

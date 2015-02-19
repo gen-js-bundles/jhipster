@@ -1,3 +1,6 @@
+<%
+  if(authenticationType == 'session') {
+%>
 'use strict';
 
 angular.module('<%=angularAppName%>')
@@ -24,3 +27,7 @@ angular.module('<%=angularAppName%>')
                 }
             });
     });
+
+<%
+  }
+%>

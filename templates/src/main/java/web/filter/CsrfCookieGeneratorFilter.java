@@ -1,3 +1,6 @@
+<%
+  if(authenticationType == 'session') {
+%>
 package <%=packageName%>.web.filter;
 
 import org.springframework.security.web.csrf.CsrfToken;
@@ -34,3 +37,7 @@ public class CsrfCookieGeneratorFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 }
+
+<%
+  }
+%>

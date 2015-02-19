@@ -1,3 +1,6 @@
+<%
+  if(authenticationType == 'xauth') {
+%>
 package <%=packageName%>.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
@@ -44,3 +47,7 @@ public class UserXAuthTokenController {
         return tokenProvider.createToken(details);
     }
 }
+
+<%
+  }
+%>

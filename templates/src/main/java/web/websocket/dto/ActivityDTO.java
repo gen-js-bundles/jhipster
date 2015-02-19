@@ -1,3 +1,6 @@
+<%
+  if(websocket == 'spring-websocket') {
+%>
 package <%=packageName%>.web.websocket.dto;
 
 /**
@@ -66,3 +69,7 @@ public class ActivityDTO {
             '}';
     }
 }
+
+<%
+  }
+%>

@@ -1,3 +1,6 @@
+<%
+  if(buildTool === "gradle" && databaseType === "sql") {
+%>
 configurations {
   liquibase
 }
@@ -29,3 +32,7 @@ def buildTimestamp() {
   def formattedDate = date.format('yyyyMMddHHmmss')
   return formattedDate
 }
+
+<%
+  }
+%>

@@ -1,3 +1,6 @@
+<%
+  if(authenticationType == "xauth") {
+%>
 package <%=packageName%>.config;
 
 import <%=packageName%>.security.xauth.TokenProvider;
@@ -27,3 +30,7 @@ public class XAuthConfiguration implements EnvironmentAware {
         return new TokenProvider(secret, validityInSeconds);
     }
 }
+
+<%
+  }
+%>

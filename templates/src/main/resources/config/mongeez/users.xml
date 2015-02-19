@@ -1,3 +1,6 @@
+<%
+  if(databaseType == "mongodb") {
+%>
 <mongoChangeLog>
     <changeSet changeId="ChangeSet-2" author="jhipster">
         <script>
@@ -62,3 +65,7 @@
         </script>
     </changeSet>
 </mongoChangeLog>
+
+<%
+  }
+%>

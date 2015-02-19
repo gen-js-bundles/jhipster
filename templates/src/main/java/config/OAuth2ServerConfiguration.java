@@ -1,3 +1,6 @@
+<%
+  if(authenticationType == "oauth2") {
+%>
 package <%=packageName%>.config;
 <% if (databaseType == 'mongodb') { %>
 import <%=packageName%>.config.oauth2.MongoDBTokenStore;
@@ -139,3 +142,7 @@ public class OAuth2ServerConfiguration {
         }
     }
 }
+
+<%
+  }
+%>

@@ -1,3 +1,6 @@
+<%
+  if(buildTool === "gradle") {
+%>
 apply plugin: 'com.moowork.node'<% if(frontendBuilder == 'grunt') {%>
 apply plugin: 'grunt'<% } if(frontendBuilder == 'gulp') {%>
 apply plugin: 'com.moowork.gulp'<% } %>
@@ -15,3 +18,7 @@ gulp_build.dependsOn 'bower'
 processResources.dependsOn gulp_build
 test.dependsOn gulp_test
 <% } %>
+
+<%
+  }
+%>

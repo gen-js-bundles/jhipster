@@ -1,3 +1,6 @@
+<%
+  if(authenticationType == 'session') {
+%>
 package <%=packageName%>.security;
 
 import <%=packageName%>.domain.PersistentToken;
@@ -214,3 +217,7 @@ public class CustomPersistentRememberMeServices extends
                 TOKEN_VALIDITY_SECONDS, request, response);
     }
 }
+
+<%
+  }
+%>

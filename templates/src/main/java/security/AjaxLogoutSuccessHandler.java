@@ -1,3 +1,6 @@
+<%
+  if(authenticationType == 'session' || authenticationType == 'oauth2') {
+%>
 package <%=packageName%>.security;
 <% if (authenticationType == 'oauth2') { %>
 import org.apache.commons.lang.StringUtils;<% } %>
@@ -44,3 +47,7 @@ public class AjaxLogoutSuccessHandler extends AbstractAuthenticationTargetUrlReq
         response.setStatus(HttpServletResponse.SC_OK);
     }
 }
+
+<%
+  }
+%>

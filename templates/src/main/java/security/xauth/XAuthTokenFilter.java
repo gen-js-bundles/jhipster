@@ -1,3 +1,6 @@
+<%
+  if(authenticationType == 'xauth') {
+%>
 package <%=packageName%>.security.xauth;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -50,3 +53,7 @@ public class XAuthTokenFilter extends GenericFilterBean {
         }
     }
 }
+
+<%
+  }
+%>

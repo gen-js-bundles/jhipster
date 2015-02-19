@@ -1,3 +1,6 @@
+<%
+  if(frontendBuilder === "gulp") {
+%>
 // Generated on <%= (new Date).toISOString().split('T')[0] %> using <%= pkg.name %> <%= pkg.version %>
 /* jshint camelcase: false */
 'use strict';
@@ -290,3 +293,7 @@ gulp.task('server', ['serve'], function () {
 gulp.task('default', function() {
     runSequence('test', 'build');
 });
+
+<%
+  }
+%>

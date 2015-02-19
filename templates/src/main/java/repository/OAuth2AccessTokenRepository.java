@@ -1,3 +1,6 @@
+<%
+  if(databaseType == 'mongodb' &&  authenticationType == 'oauth2') {
+%>
 package <%=packageName%>.repository;
 
 import <%=packageName%>.domain.OAuth2AuthenticationAccessToken;
@@ -20,3 +23,7 @@ public interface OAuth2AccessTokenRepository extends MongoRepository<OAuth2Authe
 
     public List<OAuth2AuthenticationAccessToken> findByClientId(String clientId);
 }
+
+<%
+  }
+%>

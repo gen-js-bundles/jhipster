@@ -1,3 +1,6 @@
+<%
+  if(websocket == 'spring-websocket') {
+%>
 angular.module('<%=angularAppName%>')
     .controller('TrackerController', function ($scope<% if (authenticationType == 'oauth2') { %>, AuthServerProvider<% } %>) {
         // This controller uses a Websocket connection to receive user activities in real-time.
@@ -30,3 +33,7 @@ angular.module('<%=angularAppName%>')
             $scope.$apply();
         };
     });
+
+<%
+  }
+%>

@@ -1,3 +1,6 @@
+<%
+  if(authenticationType == 'xauth') {
+%>
 package <%=packageName%>.security.xauth;
 
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
@@ -23,3 +26,7 @@ public class XAuthTokenConfigurer extends SecurityConfigurerAdapter<DefaultSecur
         http.addFilterBefore(customFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }
+
+<%
+  }
+%>

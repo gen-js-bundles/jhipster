@@ -1,3 +1,6 @@
+<%
+  if(!useCompass) {
+%>
 body {
     background: #fafafa;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -141,3 +144,7 @@ ul#strength {
     width:20px;
 }
 /* end Password strength bar style */
+
+<%
+  }
+%>

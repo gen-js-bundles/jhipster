@@ -1,4 +1,11 @@
+<%
+  if(databaseType == "mongodb") {
+%>
 <changeFiles>
     <file path="authorities.xml"/>
     <file path="users.xml"/>
 </changeFiles>
+
+<%
+  }
+%>

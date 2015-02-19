@@ -1,3 +1,6 @@
+<%
+  if(authenticationType == 'session') {
+%>
 package <%=packageName%>.domain;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
@@ -149,3 +152,7 @@ public class PersistentToken implements Serializable {
                 "}";
     }
 }
+
+<%
+  }
+%>

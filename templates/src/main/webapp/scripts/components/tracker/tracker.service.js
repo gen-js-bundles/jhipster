@@ -1,3 +1,6 @@
+<%
+  if(websocket == 'spring-websocket') {
+%>
 'use strict';
 
 angular.module('<%=angularAppName%>')
@@ -34,3 +37,7 @@ angular.module('<%=angularAppName%>')
             }
         };
     });
+
+<%
+  }
+%>

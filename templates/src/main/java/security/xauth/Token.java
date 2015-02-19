@@ -1,3 +1,6 @@
+<%
+  if(authenticationType == 'xauth') {
+%>
 package <%=packageName%>.security.xauth;
 
 /**
@@ -21,3 +24,7 @@ public class Token {
         return expires;
     }
 }
+
+<%
+  }
+%>

@@ -1,3 +1,6 @@
+<%
+  if(authenticationType == 'xauth') {
+%>
 'use strict';
 
 angular.module('<%=angularAppName%>')
@@ -29,3 +32,7 @@ angular.module('<%=angularAppName%>')
             }
         };
     });
+
+<%
+  }
+%>

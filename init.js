@@ -25,31 +25,31 @@ function main() {
 
 //  switch (this.frontendBuilder) {
 //      case 'gulp':
-            copy(src, 'gulpfile.js', 'gulpfile.js');
+            copy(src, 'gulpfile.js', 'gulpfile.js', 'frontendBuilder === "gulp"');
 //          break;
 //      case 'grunt':
 //      default:
-            copy(src, 'Gruntfile.js', 'Gruntfile.js');
+            copy(src, 'Gruntfile.js', 'Gruntfile.js', 'frontendBuilder === "grunt"');
 //  }
 
 //  switch (this.buildTool) {
 //      case 'gradle':
-            copy(src, '_build.gradle', 'build.gradle');
-            copy(src, '_gradle.properties', 'gradle.properties');
-            copy(src, '_yeoman.gradle', 'yeoman.gradle');
-            copy(src, '_profile_dev.gradle', 'profile_dev.gradle');
-            copy(src, '_profile_prod.gradle', 'profile_prod.gradle');
+            copy(src, '_build.gradle', 'build.gradle', 'buildTool === "gradle"');
+            copy(src, '_gradle.properties', 'gradle.properties', 'buildTool === "gradle"');
+            copy(src, '_yeoman.gradle', 'yeoman.gradle', 'buildTool === "gradle"');
+            copy(src, '_profile_dev.gradle', 'profile_dev.gradle', 'buildTool === "gradle"');
+            copy(src, '_profile_prod.gradle', 'profile_prod.gradle', 'buildTool === "gradle"');
 //    //  if (this.databaseType == "sql") {
-            copy(src, '_liquibase.gradle', 'liquibase.gradle');
+            copy(src, '_liquibase.gradle', 'liquibase.gradle', 'buildTool === "gradle" && databaseType === "sql"');
 //    //  }
-            copy(src, 'gradlew', 'gradlew');
-            copy(src, 'gradlew.bat', 'gradlew.bat');
+            copy(src, 'gradlew', 'gradlew', 'buildTool === "gradle"');
+            copy(src, 'gradlew.bat', 'gradlew.bat', 'buildTool === "gradle"');
             copy(src, 'gradle/wrapper/gradle-wrapper.jar', 'gradle/wrapper/gradle-wrapper.jar');
-            copy(src, 'gradle/wrapper/gradle-wrapper.properties', 'gradle/wrapper/gradle-wrapper.properties');
+            copy(src, 'gradle/wrapper/gradle-wrapper.properties', 'gradle/wrapper/gradle-wrapper.properties', 'buildTool === "gradle"');
 //          break;
 //      case 'maven':
 //      default :
-            copy(src, '_pom.xml', 'pom.xml');
+            copy(src, '_pom.xml', 'pom.xml', 'buildTool === "maven"');
 ////  }
 
     // Create Java resource files
@@ -57,10 +57,10 @@ function main() {
     copy(src, resourceDir + '/banner.txt', resourceDir + '/banner.txt');
 
 ////  if (this.hibernateCache == "ehcache") {
-        copy(src, resourceDir + '_ehcache.xml', resourceDir + 'ehcache.xml');
+        copy(src, resourceDir + '_ehcache.xml', resourceDir + 'ehcache.xml', 'hibernateCache == "ehcache"');
 ////  }
 ////  if (this.devDatabaseType == "h2Memory") {
-        copy(src, resourceDir + 'h2.server.properties', resourceDir + '.h2.server.properties');
+        copy(src, resourceDir + 'h2.server.properties', resourceDir + '.h2.server.properties', 'devDatabaseType == "h2Memory"');
 ////  }
 
     // Thymeleaf templates
@@ -73,17 +73,17 @@ function main() {
     copy(src, resourceDir + '/config/_application-prod.yml', resourceDir + 'config/application-prod.yml');
 
 ////  if (this.databaseType == "sql") {
-        copy(src, resourceDir + '/config/liquibase/changelog/_initial_schema.xml', resourceDir + 'config/liquibase/changelog/00000000000000_initial_schema.xml');
-        copy(src, resourceDir + '/config/liquibase/master.xml', resourceDir + 'config/liquibase/master.xml');
-        copy(src, resourceDir + '/config/liquibase/users.csv', resourceDir + 'config/liquibase/users.csv');
-        copy(src, resourceDir + '/config/liquibase/authorities.csv', resourceDir + 'config/liquibase/authorities.csv');
-        copy(src, resourceDir + '/config/liquibase/users_authorities.csv', resourceDir + 'config/liquibase/users_authorities.csv');
+        copy(src, resourceDir + '/config/liquibase/changelog/_initial_schema.xml', resourceDir + 'config/liquibase/changelog/00000000000000_initial_schema.xml', 'databaseType == "sql"');
+        copy(src, resourceDir + '/config/liquibase/master.xml', resourceDir + 'config/liquibase/master.xml', 'databaseType == "sql"');
+        copy(src, resourceDir + '/config/liquibase/users.csv', resourceDir + 'config/liquibase/users.csv', 'databaseType == "sql"');
+        copy(src, resourceDir + '/config/liquibase/authorities.csv', resourceDir + 'config/liquibase/authorities.csv', 'databaseType == "sql"');
+        copy(src, resourceDir + '/config/liquibase/users_authorities.csv', resourceDir + 'config/liquibase/users_authorities.csv', 'databaseType == "sql"');
 ////  }
 
 ////  if (this.databaseType == "mongodb") {
-        copy(src, resourceDir + '/config/mongeez/authorities.xml', resourceDir + 'config/mongeez/authorities.xml');
-        copy(src, resourceDir + '/config/mongeez/master.xml', resourceDir + 'config/mongeez/master.xml');
-        copy(src, resourceDir + '/config/mongeez/users.xml', resourceDir + 'config/mongeez/users.xml');
+        copy(src, resourceDir + '/config/mongeez/authorities.xml', resourceDir + 'config/mongeez/authorities.xml', 'databaseType == "mongodb"');
+        copy(src, resourceDir + '/config/mongeez/master.xml', resourceDir + 'config/mongeez/master.xml', 'databaseType == "mongodb"');
+        copy(src, resourceDir + '/config/mongeez/users.xml', resourceDir + 'config/mongeez/users.xml', 'databaseType == "mongodb"');
 ////  }
 
     // Create mail templates
@@ -107,7 +107,7 @@ function main() {
     copy(src, 'src/main/java/package/config/_Constants.java', javaDir + 'config/Constants.java');
     copy(src, 'src/main/java/package/config/_CloudDatabaseConfiguration.java', javaDir + 'config/CloudDatabaseConfiguration.java');
 //  if (this.databaseType == 'mongodb') {
-        copy(src, 'src/main/java/package/config/_CloudMongoDbConfiguration.java', javaDir + 'config/CloudMongoDbConfiguration.java');
+        copy(src, 'src/main/java/package/config/_CloudMongoDbConfiguration.java', javaDir + 'config/CloudMongoDbConfiguration.java', 'databaseType == "mongodb"');
 //  }
     copy(src, 'src/main/java/package/config/_DatabaseConfiguration.java', javaDir + 'config/DatabaseConfiguration.java');
     copy(src, 'src/main/java/package/config/_JacksonConfiguration.java', javaDir + 'config/JacksonConfiguration.java');
@@ -117,27 +117,27 @@ function main() {
     copy(src, 'src/main/java/package/config/_MetricsConfiguration.java', javaDir + 'config/MetricsConfiguration.java');
 
 //  if (this.authenticationType == 'oauth2') {
-        copy(src, 'src/main/java/package/config/_OAuth2ServerConfiguration.java', javaDir + 'config/OAuth2ServerConfiguration.java');
+        copy(src, 'src/main/java/package/config/_OAuth2ServerConfiguration.java', javaDir + 'config/OAuth2ServerConfiguration.java', 'authenticationType == "oauth2"');
 //  }
 
 //  if (this.authenticationType == 'xauth') {
-      copy(src, 'src/main/java/package/config/_XAuthConfiguration.java', javaDir + 'config/XAuthConfiguration.java');
+      copy(src, 'src/main/java/package/config/_XAuthConfiguration.java', javaDir + 'config/XAuthConfiguration.java', 'authenticationType == "xauth"');
 //  }
 
 //  if (this.databaseType == 'mongodb' &&  this.authenticationType == 'oauth2') {
-        copy(src, 'src/main/java/package/config/oauth2/_OAuth2AuthenticationReadConverter.java', javaDir + 'config/oauth2/OAuth2AuthenticationReadConverter.java');
-        copy(src, 'src/main/java/package/config/oauth2/_MongoDBTokenStore.java', javaDir + 'config/oauth2/MongoDBTokenStore.java');
-        copy(src, 'src/main/java/package/domain/_OAuth2AuthenticationAccessToken.java', javaDir + 'domain/OAuth2AuthenticationAccessToken.java');
-        copy(src, 'src/main/java/package/domain/_OAuth2AuthenticationRefreshToken.java', javaDir + 'domain/OAuth2AuthenticationRefreshToken.java');
-        copy(src, 'src/main/java/package/repository/_OAuth2AccessTokenRepository.java', javaDir + 'repository/OAuth2AccessTokenRepository.java');
-        copy(src, 'src/main/java/package/repository/_OAuth2RefreshTokenRepository.java', javaDir + 'repository/OAuth2RefreshTokenRepository.java');
+        copy(src, 'src/main/java/package/config/oauth2/_OAuth2AuthenticationReadConverter.java', javaDir + 'config/oauth2/OAuth2AuthenticationReadConverter.java', "databaseType == 'mongodb' &&  authenticationType == 'oauth2'");
+        copy(src, 'src/main/java/package/config/oauth2/_MongoDBTokenStore.java', javaDir + 'config/oauth2/MongoDBTokenStore.java', "databaseType == 'mongodb' &&  authenticationType == 'oauth2'");
+        copy(src, 'src/main/java/package/domain/_OAuth2AuthenticationAccessToken.java', javaDir + 'domain/OAuth2AuthenticationAccessToken.java', "databaseType == 'mongodb' &&  authenticationType == 'oauth2'");
+        copy(src, 'src/main/java/package/domain/_OAuth2AuthenticationRefreshToken.java', javaDir + 'domain/OAuth2AuthenticationRefreshToken.java', "databaseType == 'mongodb' &&  authenticationType == 'oauth2'");
+        copy(src, 'src/main/java/package/repository/_OAuth2AccessTokenRepository.java', javaDir + 'repository/OAuth2AccessTokenRepository.java', "databaseType == 'mongodb' &&  authenticationType == 'oauth2'");
+        copy(src, 'src/main/java/package/repository/_OAuth2RefreshTokenRepository.java', javaDir + 'repository/OAuth2RefreshTokenRepository.java', "databaseType == 'mongodb' &&  authenticationType == 'oauth2'");
 //  }
 
     copy(src, 'src/main/java/package/config/_SecurityConfiguration.java', javaDir + 'config/SecurityConfiguration.java');
     copy(src, 'src/main/java/package/config/_ThymeleafConfiguration.java', javaDir + 'config/ThymeleafConfiguration.java');
     copy(src, 'src/main/java/package/config/_WebConfigurer.java', javaDir + 'config/WebConfigurer.java');
 //  if (this.websocket == 'spring-websocket') {
-        copy(src, 'src/main/java/package/config/_WebsocketConfiguration.java', javaDir + 'config/WebsocketConfiguration.java');
+        copy(src, 'src/main/java/package/config/_WebsocketConfiguration.java', javaDir + 'config/WebsocketConfiguration.java', "websocket == 'spring-websocket'");
 //  }
 
     copy(src, 'src/main/java/package/config/audit/_package-info.java', javaDir + 'config/audit/package-info.java');
@@ -152,8 +152,8 @@ function main() {
     copy(src, 'src/main/java/package/config/metrics/_JHipsterHealthIndicatorConfiguration.java', javaDir + 'config/metrics/JHipsterHealthIndicatorConfiguration.java');
 
 //  if (this.hibernateCache == "hazelcast") {
-        copy(src, 'src/main/java/package/config/hazelcast/_HazelcastCacheRegionFactory.java', javaDir + 'config/hazelcast/HazelcastCacheRegionFactory.java');
-        copy(src, 'src/main/java/package/config/hazelcast/_package-info.java', javaDir + 'config/hazelcast/package-info.java');
+        copy(src, 'src/main/java/package/config/hazelcast/_HazelcastCacheRegionFactory.java', javaDir + 'config/hazelcast/HazelcastCacheRegionFactory.java', 'hibernateCache == "hazelcast"');
+        copy(src, 'src/main/java/package/config/hazelcast/_package-info.java', javaDir + 'config/hazelcast/package-info.java', 'hibernateCache == "hazelcast"');
 //  }
 
     copy(src, 'src/main/java/package/domain/_package-info.java', javaDir + 'domain/package-info.java');
@@ -161,7 +161,7 @@ function main() {
     copy(src, 'src/main/java/package/domain/_Authority.java', javaDir + 'domain/Authority.java');
     copy(src, 'src/main/java/package/domain/_PersistentAuditEvent.java', javaDir + 'domain/PersistentAuditEvent.java');
 //  if (this.authenticationType == 'session') {
-        copy(src, 'src/main/java/package/domain/_PersistentToken.java', javaDir + 'domain/PersistentToken.java');
+        copy(src, 'src/main/java/package/domain/_PersistentToken.java', javaDir + 'domain/PersistentToken.java', "authenticationType == 'session'");
 //  }
     copy(src, 'src/main/java/package/domain/_User.java', javaDir + 'domain/User.java');
     copy(src, 'src/main/java/package/domain/util/_CustomLocalDateSerializer.java', javaDir + 'domain/util/CustomLocalDateSerializer.java');
@@ -176,7 +176,7 @@ function main() {
     copy(src, 'src/main/java/package/repository/_UserRepository.java', javaDir + 'repository/UserRepository.java');
 
 //  if (this.authenticationType == 'session') {
-        copy(src, 'src/main/java/package/repository/_PersistentTokenRepository.java', javaDir + 'repository/PersistentTokenRepository.java');
+        copy(src, 'src/main/java/package/repository/_PersistentTokenRepository.java', javaDir + 'repository/PersistentTokenRepository.java', "authenticationType == 'session'");
 //  }
     copy(src, 'src/main/java/package/repository/_PersistenceAuditEventRepository.java', javaDir + 'repository/PersistenceAuditEventRepository.java');
 
@@ -184,14 +184,14 @@ function main() {
     copy(src, 'src/main/java/package/security/_AjaxAuthenticationFailureHandler.java', javaDir + 'security/AjaxAuthenticationFailureHandler.java');
     copy(src, 'src/main/java/package/security/_AjaxAuthenticationSuccessHandler.java', javaDir + 'security/AjaxAuthenticationSuccessHandler.java');
 //  if (this.authenticationType == 'session' || this.authenticationType == 'oauth2') {
-        copy(src, 'src/main/java/package/security/_AjaxLogoutSuccessHandler.java', javaDir + 'security/AjaxLogoutSuccessHandler.java');
+        copy(src, 'src/main/java/package/security/_AjaxLogoutSuccessHandler.java', javaDir + 'security/AjaxLogoutSuccessHandler.java', "authenticationType == 'session' || authenticationType == 'oauth2'");
 //  }
 //  if (this.authenticationType == 'xauth'){
-        copy(src, 'src/main/java/package/security/_AuthenticationProvider.java', javaDir + 'security/AuthenticationProvider.java');
+        copy(src, 'src/main/java/package/security/_AuthenticationProvider.java', javaDir + 'security/AuthenticationProvider.java', "authenticationType == 'xauth'");
 //  }
     copy(src, 'src/main/java/package/security/_AuthoritiesConstants.java', javaDir + 'security/AuthoritiesConstants.java');
 //  if (this.authenticationType == 'session') {
-        copy(src, 'src/main/java/package/security/_CustomPersistentRememberMeServices.java', javaDir + 'security/CustomPersistentRememberMeServices.java');
+        copy(src, 'src/main/java/package/security/_CustomPersistentRememberMeServices.java', javaDir + 'security/CustomPersistentRememberMeServices.java', "authenticationType == 'session'");
 //  }
     copy(src, 'src/main/java/package/security/_Http401UnauthorizedEntryPoint.java', javaDir + 'security/Http401UnauthorizedEntryPoint.java');
     copy(src, 'src/main/java/package/security/_SecurityUtils.java', javaDir + 'security/SecurityUtils.java');
@@ -200,11 +200,11 @@ function main() {
     copy(src, 'src/main/java/package/security/_UserNotActivatedException.java', javaDir + 'security/UserNotActivatedException.java');
 
 //  if (this.authenticationType == 'xauth'){
-      copy(src, 'src/main/java/package/security/xauth/_Token.java', javaDir + 'security/xauth/Token.java');
-      copy(src, 'src/main/java/package/security/xauth/_TokenProvider.java', javaDir + 'security/xauth/TokenProvider.java');
-      copy(src, 'src/main/java/package/web/rest/_UserXAuthTokenController.java', javaDir + 'web/rest/UserXAuthTokenController.java');
-      copy(src, 'src/main/java/package/security/xauth/_XAuthTokenConfigurer.java', javaDir + 'security/xauth/XAuthTokenConfigurer.java');
-      copy(src, 'src/main/java/package/security/xauth/_XAuthTokenFilter.java', javaDir + 'security/xauth/XAuthTokenFilter.java');
+      copy(src, 'src/main/java/package/security/xauth/_Token.java', javaDir + 'security/xauth/Token.java', "authenticationType == 'xauth'");
+      copy(src, 'src/main/java/package/security/xauth/_TokenProvider.java', javaDir + 'security/xauth/TokenProvider.java', "authenticationType == 'xauth'");
+      copy(src, 'src/main/java/package/web/rest/_UserXAuthTokenController.java', javaDir + 'web/rest/UserXAuthTokenController.java', "authenticationType == 'xauth'");
+      copy(src, 'src/main/java/package/security/xauth/_XAuthTokenConfigurer.java', javaDir + 'security/xauth/XAuthTokenConfigurer.java', "authenticationType == 'xauth'");
+      copy(src, 'src/main/java/package/security/xauth/_XAuthTokenFilter.java', javaDir + 'security/xauth/XAuthTokenFilter.java', "authenticationType == 'xauth'");
 //  }
 
     copy(src, 'src/main/java/package/service/_package-info.java', javaDir + 'service/package-info.java');
@@ -217,7 +217,7 @@ function main() {
     copy(src, 'src/main/java/package/web/filter/_CachingHttpHeadersFilter.java', javaDir + 'web/filter/CachingHttpHeadersFilter.java');
     copy(src, 'src/main/java/package/web/filter/_StaticResourcesProductionFilter.java', javaDir + 'web/filter/StaticResourcesProductionFilter.java');
 //  if (this.authenticationType == 'session') {
-        copy(src, 'src/main/java/package/web/filter/_CsrfCookieGeneratorFilter.java', javaDir + 'web/filter/CsrfCookieGeneratorFilter.java');
+        copy(src, 'src/main/java/package/web/filter/_CsrfCookieGeneratorFilter.java', javaDir + 'web/filter/CsrfCookieGeneratorFilter.java', "authenticationType == 'session'");
 //  }
 
     copy(src, 'src/main/java/package/web/filter/gzip/_package-info.java', javaDir + 'web/filter/gzip/package-info.java');
@@ -240,10 +240,10 @@ function main() {
     copy(src, 'src/main/java/package/web/rest/_UserResource.java', javaDir + 'web/rest/UserResource.java');
 
 //  if (this.websocket == 'spring-websocket') {
-        copy(src, 'src/main/java/package/web/websocket/_package-info.java', javaDir + 'web/websocket/package-info.java');
-        copy(src, 'src/main/java/package/web/websocket/_ActivityService.java', javaDir + 'web/websocket/ActivityService.java');
-        copy(src, 'src/main/java/package/web/websocket/dto/_package-info.java', javaDir + 'web/websocket/dto/package-info.java');
-        copy(src, 'src/main/java/package/web/websocket/dto/_ActivityDTO.java', javaDir + 'web/websocket/dto/ActivityDTO.java');
+        copy(src, 'src/main/java/package/web/websocket/_package-info.java', javaDir + 'web/websocket/package-info.java', "websocket == 'spring-websocket'");
+        copy(src, 'src/main/java/package/web/websocket/_ActivityService.java', javaDir + 'web/websocket/ActivityService.java', "websocket == 'spring-websocket'");
+        copy(src, 'src/main/java/package/web/websocket/dto/_package-info.java', javaDir + 'web/websocket/dto/package-info.java', "websocket == 'spring-websocket'");
+        copy(src, 'src/main/java/package/web/websocket/dto/_ActivityDTO.java', javaDir + 'web/websocket/dto/ActivityDTO.java', "websocket == 'spring-websocket'");
 //  }
 
     // Create Test Java files
@@ -252,7 +252,7 @@ function main() {
 //  this.mkdir(testDir);
 
 //  if (this.databaseType == "mongodb") {
-        copy(src, 'src/test/java/package/config/_MongoConfiguration.java', testDir + 'config/MongoConfiguration.java');
+        copy(src, 'src/test/java/package/config/_MongoConfiguration.java', testDir + 'config/MongoConfiguration.java', 'databaseType == "mongodb"');
 //  }
     copy(src, 'src/test/java/package/security/_SecurityUtilsTest.java', testDir + 'security/SecurityUtilsTest.java');
     copy(src, 'src/test/java/package/service/_UserServiceTest.java', testDir + 'service/UserServiceTest.java');
@@ -264,7 +264,7 @@ function main() {
     copy(src, testResourceDir + '_logback-test.xml', testResourceDir + 'logback-test.xml');
 
 //  if (this.hibernateCache == "ehcache") {
-        copy(src, testResourceDir + '_ehcache.xml', testResourceDir + 'ehcache.xml');
+        copy(src, testResourceDir + '_ehcache.xml', testResourceDir + 'ehcache.xml', 'hibernateCache == "ehcache"');
 //  }
 
     // Create Webapp
@@ -272,9 +272,9 @@ function main() {
 
     // normal CSS or SCSS?
 //  if (this.useCompass) {
-        copy(src, 'src/main/scss/main.scss', 'src/main/scss/main.scss');
+        copy(src, 'src/main/scss/main.scss', 'src/main/scss/main.scss', 'useCompass');
 //  } else {
-        copy(src, 'src/main/webapp/assets/styles/main.css', 'src/main/webapp/assets/styles/main.css');
+        copy(src, 'src/main/webapp/assets/styles/main.css', 'src/main/webapp/assets/styles/main.css', '!useCompass');
 //  }
 
     // HTML5 BoilerPlate
@@ -301,18 +301,18 @@ function main() {
     copy(src, webappDir + '/scripts/components/auth/_auth.service.js', webappDir + 'scripts/components/auth/auth.service.js');
     copy(src, webappDir + '/scripts/components/auth/_principal.service.js', webappDir + 'scripts/components/auth/principal.service.js');
 //  if (this.authenticationType == 'oauth2') {
-        copy(src, webappDir + '/scripts/components/auth/provider/_auth.oauth2.service.js', webappDir + 'scripts/components/auth/provider/auth.oauth2.service.js');
+        copy(src, webappDir + '/scripts/components/auth/provider/_auth.oauth2.service.js', webappDir + 'scripts/components/auth/provider/auth.oauth2.service.js', "authenticationType == 'oauth2'");
 //  } else if (this.authenticationType == 'xauth') {
-        copy(src, webappDir + '/scripts/components/auth/provider/_auth.xauth.service.js', webappDir + 'scripts/components/auth/provider/auth.xauth.service.js');
+        copy(src, webappDir + '/scripts/components/auth/provider/_auth.xauth.service.js', webappDir + 'scripts/components/auth/provider/auth.xauth.service.js', "authenticationType == 'xauth'");
 //  } else {
-        copy(src, webappDir + '/scripts/components/auth/provider/_auth.session.service.js', webappDir + 'scripts/components/auth/provider/auth.session.service.js');
+        copy(src, webappDir + '/scripts/components/auth/provider/_auth.session.service.js', webappDir + 'scripts/components/auth/provider/auth.session.service.js', "authenticationType != 'oauth2' && authenticationType == 'xauth2'");
 //  }
     copy(src, webappDir + '/scripts/components/auth/services/_account.service.js', webappDir + 'scripts/components/auth/services/account.service.js');
     copy(src, webappDir + '/scripts/components/auth/services/_activate.service.js', webappDir + 'scripts/components/auth/services/activate.service.js');
     copy(src, webappDir + '/scripts/components/auth/services/_password.service.js', webappDir + 'scripts/components/auth/services/password.service.js');
     copy(src, webappDir + '/scripts/components/auth/services/_register.service.js', webappDir + 'scripts/components/auth/services/register.service.js');
 //  if (this.authenticationType == 'session') {
-        copy(src, webappDir + '/scripts/components/auth/services/_sessions.service.js', webappDir + 'scripts/components/auth/services/sessions.service.js');
+        copy(src, webappDir + '/scripts/components/auth/services/_sessions.service.js', webappDir + 'scripts/components/auth/services/sessions.service.js', "authenticationType == 'session'");
 //  }
     copy(src, webappDir + '/scripts/components/form/_form.directive.js', webappDir + 'scripts/components/form/form.directive.js');
     copy(src, webappDir + '/scripts/components/language/_language.controller.js', webappDir + 'scripts/components/language/language.controller.js');
@@ -341,9 +341,9 @@ function main() {
     copy(src, webappDir + '/scripts/app/account/register/_register.js', webappDir + 'scripts/app/account/register/register.js');
     copy(src, webappDir + '/scripts/app/account/register/_register.controller.js', webappDir + 'scripts/app/account/register/register.controller.js');
 //  if (this.authenticationType == 'session') {
-        copy(src, webappDir + '/scripts/app/account/sessions/sessions.html', webappDir + 'scripts/app/account/sessions/sessions.html');
-        copy(src, webappDir + '/scripts/app/account/sessions/_sessions.js', webappDir + 'scripts/app/account/sessions/sessions.js');
-        copy(src, webappDir + '/scripts/app/account/sessions/_sessions.controller.js', webappDir + 'scripts/app/account/sessions/sessions.controller.js');
+        copy(src, webappDir + '/scripts/app/account/sessions/sessions.html', webappDir + 'scripts/app/account/sessions/sessions.html', "authenticationType == 'session'");
+        copy(src, webappDir + '/scripts/app/account/sessions/_sessions.js', webappDir + 'scripts/app/account/sessions/sessions.js', "authenticationType == 'session'");
+        copy(src, webappDir + '/scripts/app/account/sessions/_sessions.controller.js', webappDir + 'scripts/app/account/sessions/sessions.controller.js', "authenticationType == 'session'");
 //  }
     copy(src, webappDir + '/scripts/app/account/settings/settings.html', webappDir + 'scripts/app/account/settings/settings.html');
     copy(src, webappDir + '/scripts/app/account/settings/_settings.js', webappDir + 'scripts/app/account/settings/settings.js');
@@ -367,10 +367,10 @@ function main() {
     copy(src, webappDir + '/scripts/app/admin/metrics/_metrics.js', webappDir + 'scripts/app/admin/metrics/metrics.js');
     copy(src, webappDir + '/scripts/app/admin/metrics/_metrics.controller.js', webappDir + 'scripts/app/admin/metrics/metrics.controller.js');
 //  if (this.websocket == 'spring-websocket') {
-        copy(src, webappDir + '/scripts/app/admin/tracker/tracker.html', webappDir + 'scripts/app/admin/tracker/tracker.html');
-        copy(src, webappDir + '/scripts/app/admin/tracker/_tracker.js', webappDir + 'scripts/app/admin/tracker/tracker.js');
-        copy(src, webappDir + '/scripts/app/admin/tracker/_tracker.controller.js', webappDir + 'scripts/app/admin/tracker/tracker.controller.js');
-        copy(src, webappDir + '/scripts/components/tracker/_tracker.service.js', webappDir + '/scripts/components/tracker/tracker.service.js');
+        copy(src, webappDir + '/scripts/app/admin/tracker/tracker.html', webappDir + 'scripts/app/admin/tracker/tracker.html', "websocket == 'spring-websocket'");
+        copy(src, webappDir + '/scripts/app/admin/tracker/_tracker.js', webappDir + 'scripts/app/admin/tracker/tracker.js', "websocket == 'spring-websocket'");
+        copy(src, webappDir + '/scripts/app/admin/tracker/_tracker.controller.js', webappDir + 'scripts/app/admin/tracker/tracker.controller.js', "websocket == 'spring-websocket'");
+        copy(src, webappDir + '/scripts/components/tracker/_tracker.service.js', webappDir + '/scripts/components/tracker/tracker.service.js', "websocket == 'spring-websocket'");
 //  }
     copy(src, webappDir + '/scripts/app/error/error.html', webappDir + 'scripts/app/error/error.html');
     copy(src, webappDir + '/scripts/app/error/accessdenied.html', webappDir + 'scripts/app/error/accessdenied.html');
@@ -392,7 +392,7 @@ function main() {
     copy(src, testJsDir + 'spec/app/account/password/_passwordControllerSpec.js', testJsDir + 'spec/app/account/password/passwordControllerSpec.js');
     copy(src, testJsDir + 'spec/app/account/password/_passwordDirectiveSpec.js', testJsDir + 'spec/app/account/password/passwordDirectiveSpec.js');
 //  if (this.authenticationType == 'session') {
-        copy(src, testJsDir + 'spec/app/account/sessions/_sessionsControllerSpec.js', testJsDir + 'spec/app/account/sessions/sessionsControllerSpec.js');
+        copy(src, testJsDir + 'spec/app/account/sessions/_sessionsControllerSpec.js', testJsDir + 'spec/app/account/sessions/sessionsControllerSpec.js', "authenticationType == 'session'");
 //  }
     copy(src, testJsDir + 'spec/app/account/settings/_settingsControllerSpec.js', testJsDir + 'spec/app/account/settings/settingsControllerSpec.js');
     copy(src, testJsDir + 'spec/components/auth/_authServicesSpec.js', testJsDir + 'spec/components/auth/authServicesSpec.js');
@@ -487,12 +487,15 @@ function main() {
 
 }
 
-function copy(src, infile, outfile) {
+function copy(src, infile, outfile, condition) {
     try {
         var outFile = path.join(__dirname,dest,outfile);
         mkdirp(path.dirname(outFile));
         var inFile = path.join(__dirname,src,infile);
         var data = fs.readFileSync(inFile);
+        if(condition != null && condition != '') {
+          data = '<%\n  if(' + condition + ') {\n%>\n' + data + '\n<%\n  }\n%>';
+        }
         fs.writeFileSync(outFile, data);
         console.log('=> ', outFile);
     } catch(e) {

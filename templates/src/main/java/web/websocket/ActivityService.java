@@ -1,3 +1,6 @@
+<%
+  if(websocket == 'spring-websocket') {
+%>
 package <%=packageName%>.web.websocket;
 
 import <%=packageName%>.security.SecurityUtils;
@@ -58,3 +61,7 @@ public class ActivityService implements ApplicationListener<SessionDisconnectEve
         messagingTemplate.convertAndSend("/topic/activity", activityDTO);
     }
 }
+
+<%
+  }
+%>

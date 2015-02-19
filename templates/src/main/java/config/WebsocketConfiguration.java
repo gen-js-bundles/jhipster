@@ -1,3 +1,6 @@
+<%
+  if(websocket == 'spring-websocket') {
+%>
 package <%=packageName%>.config;
 
 import <%=packageName%>.security.AuthoritiesConstants;
@@ -77,3 +80,7 @@ public class WebsocketConfiguration extends AbstractWebSocketMessageBrokerConfig
         };
     }
 }
+
+<%
+  }
+%>

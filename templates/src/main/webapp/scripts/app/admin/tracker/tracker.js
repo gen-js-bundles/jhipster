@@ -1,3 +1,6 @@
+<%
+  if(websocket == 'spring-websocket') {
+%>
 angular.module('<%=angularAppName%>')
     .config(function ($stateProvider) {
         $stateProvider
@@ -21,3 +24,7 @@ angular.module('<%=angularAppName%>')
                 }
             });
     });
+
+<%
+  }
+%>

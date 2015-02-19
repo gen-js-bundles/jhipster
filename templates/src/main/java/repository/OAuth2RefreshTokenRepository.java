@@ -1,3 +1,6 @@
+<%
+  if(databaseType == 'mongodb' &&  authenticationType == 'oauth2') {
+%>
 package <%=packageName%>.repository;
 
 import <%=packageName%>.domain.OAuth2AuthenticationRefreshToken;
@@ -10,3 +13,7 @@ public interface OAuth2RefreshTokenRepository extends MongoRepository<OAuth2Auth
 
     public OAuth2AuthenticationRefreshToken findByTokenId(String tokenId);
 }
+
+<%
+  }
+%>

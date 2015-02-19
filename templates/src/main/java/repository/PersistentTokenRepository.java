@@ -1,3 +1,6 @@
+<%
+  if(authenticationType == 'session') {
+%>
 package <%=packageName%>.repository;
 
 import <%=packageName%>.domain.PersistentToken;
@@ -20,3 +23,7 @@ public interface PersistentTokenRepository extends <% if (databaseType == 'sql')
     List<PersistentToken> findByTokenDateBefore(LocalDate localDate);
 
 }
+
+<%
+  }
+%>

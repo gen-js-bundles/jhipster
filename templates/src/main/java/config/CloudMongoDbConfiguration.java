@@ -1,3 +1,6 @@
+<%
+  if(databaseType == "mongodb") {
+%>
 package <%=packageName%>.config;
 
 import com.mongodb.Mongo;<% if (authenticationType == 'oauth2') { %>
@@ -57,3 +60,7 @@ public class CloudMongoDbConfiguration extends AbstractMongoConfiguration  {
         return mongoDbFactory().getDb().getMongo();
     }
 }
+
+<%
+  }
+%>

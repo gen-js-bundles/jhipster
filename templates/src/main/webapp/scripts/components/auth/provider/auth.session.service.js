@@ -1,3 +1,6 @@
+<%
+  if(authenticationType != 'oauth2' && authenticationType == 'xauth2') {
+%>
 'use strict';
 
 angular.module('<%=angularAppName%>')
@@ -36,3 +39,7 @@ angular.module('<%=angularAppName%>')
             }
         };
     });
+
+<%
+  }
+%>

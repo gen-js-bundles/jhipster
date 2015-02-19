@@ -1,3 +1,6 @@
+<%
+  if(databaseType == 'mongodb' &&  authenticationType == 'oauth2') {
+%>
 package <%=packageName%>.config.oauth2;
 
 import <%=packageName%>.domain.OAuth2AuthenticationAccessToken;
@@ -116,3 +119,7 @@ public class MongoDBTokenStore implements TokenStore {
         return accessTokens;
     }
 }
+
+<%
+  }
+%>

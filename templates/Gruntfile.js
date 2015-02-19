@@ -1,3 +1,6 @@
+<%
+  if(frontendBuilder === "grunt") {
+%>
 // Generated on <%= (new Date).toISOString().split('T')[0] %> using <%= pkg.name %> <%= pkg.version %>
 'use strict';
 var fs = require('fs');
@@ -494,3 +497,7 @@ module.exports = function (grunt) {
         'build'
     ]);
 };
+
+<%
+  }
+%>

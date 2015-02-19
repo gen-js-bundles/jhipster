@@ -1,3 +1,6 @@
+<%
+  if(databaseType == 'mongodb' &&  authenticationType == 'oauth2') {
+%>
 package <%=packageName%>.config.oauth2;
 
 import com.mongodb.DBObject;
@@ -60,3 +63,7 @@ public class OAuth2AuthenticationReadConverter implements Converter<DBObject, OA
         return grantedAuthorities;
     }
 }
+
+<%
+  }
+%>

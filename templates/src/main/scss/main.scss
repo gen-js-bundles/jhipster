@@ -1,3 +1,6 @@
+<%
+  if(useCompass) {
+%>
 $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 
 // bower:scss
@@ -110,3 +113,7 @@ ul#strength {
     width:20px;
 }
 /* end Password strength bar style */
+
+<%
+  }
+%>

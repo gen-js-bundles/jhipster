@@ -1,3 +1,6 @@
+<%
+  if(authenticationType == 'xauth') {
+%>
 package <%=packageName%>.security.xauth;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -54,3 +57,7 @@ public class TokenProvider {
         return expires >= System.currentTimeMillis() && signature.equals(signatureToMatch);
     }
 }
+
+<%
+  }
+%>

@@ -11,8 +11,8 @@ main();
 
 function main() {
 	var resourceDir = 'src/main/resources/';
-	var javaDir = 'src/main/java/';
-	var packageFolder = 'package';
+	var javaDir = 'src/main/java/PPP/';
+	var packageFolder = 'PPP';
 	var webappDir = 'src/main/webapp/';
 
     // Create application
@@ -381,7 +381,6 @@ function main() {
     copy(src, webappDir + '/scripts/app/main/_main.controller.js', webappDir + 'scripts/app/main/main.controller.js');
 
     // Index page
-    copy(src, webappDir + '_index.html', webappDir + 'index.html');
 //    this.indexFile = this.readFileAsString(path.join(this.sourceRoot(), webappDir + '_index.html'));
 //    this.indexFile = this.engine(this.indexFile);
 
@@ -482,8 +481,9 @@ function main() {
             'scripts/components/tracker/tracker.service.js'])
 //  }
 
-//    this.indexFile = this.appendScripts(this.indexFile, 'scripts/app.js', appScripts, {}, ['.tmp', 'src/main/webapp']);
-//    this.write(webappDir + 'index.html', this.indexFile);
+//    var indexFile = appendScripts(this.indexFile, 'scripts/app.js', appScripts, {}, ['.tmp', 'src/main/webapp']);
+//    write(webappDir + 'index.html', indexFile);
+    appendScripts(src, webappDir + '_index.html', webappDir + 'index.html', 'scripts/app.js', appScripts, {}, ['.tmp', 'src/main/webapp']);
 
 }
 
@@ -511,4 +511,124 @@ function mkdirp(dir) {
 	    }
 	    fs.mkdirSync(dir);
 	}
+}
+
+function read(src, infile) {
+    try {
+        var inFile = path.join(__dirname,src,infile);
+        var data = fs.readFileSync(inFile);
+        return data + '';
+    } catch(e) {
+        throw e;
+    }
+}
+
+function write(src, outfile, data) {
+    try {
+        var outFile = path.join(__dirname,dest,outfile);
+        fs.writeFileSync(outFile, data);
+        console.log('=> ', outFile);
+    } catch(e) {
+        throw e;
+    }
+}
+
+function appendScripts(src, infile, outfile, comments, scripts) { 
+    // this.indexFile, 'scripts/app.js', appScripts, {}, ['.tmp', 'src/main/webapp'])
+    var data = read(src, infile);
+
+    var str = '\n        <!-- build:js({.tmp,src/main/webapp}) scripts/app.js -->';
+
+    var appScripts = [
+        'scripts/app/app.js',
+        'scripts/app/app.constants.js',
+        'scripts/components/auth/auth.service.js',
+        'scripts/components/auth/principal.service.js',
+        'scripts/components/auth/services/account.service.js',
+        'scripts/components/auth/services/activate.service.js',
+        'scripts/components/auth/services/password.service.js',
+        'scripts/components/auth/services/register.service.js',
+        'scripts/components/form/form.directive.js',
+        'scripts/components/language/language.service.js',
+        'scripts/components/language/language.controller.js',
+        'scripts/components/admin/audits.service.js',
+        'scripts/components/admin/logs.service.js',
+        'scripts/components/admin/configuration.service.js',
+        'scripts/components/admin/monitoring.service.js',
+        'scripts/components/navbar/navbar.directive.js',
+        'scripts/components/navbar/navbar.controller.js',
+        'scripts/components/util/truncate.filter.js',
+        'scripts/components/util/base64.service.js',
+        'scripts/app/account/account.js',
+        'scripts/app/account/activate/activate.js',
+        'scripts/app/account/activate/activate.controller.js',
+        'scripts/app/account/login/login.js',
+        'scripts/app/account/login/login.controller.js',
+        'scripts/app/account/logout/logout.js',
+        'scripts/app/account/logout/logout.controller.js',
+        'scripts/app/account/password/password.js',
+        'scripts/app/account/password/password.controller.js',
+        'scripts/app/account/password/password.directive.js',
+        'scripts/app/account/register/register.js',
+        'scripts/app/account/register/register.controller.js',
+        'scripts/app/account/settings/settings.js',
+        'scripts/app/account/settings/settings.controller.js',
+        'scripts/app/admin/admin.js',
+        'scripts/app/admin/audits/audits.js',
+        'scripts/app/admin/audits/audits.controller.js',
+        'scripts/app/admin/configuration/configuration.js',
+        'scripts/app/admin/configuration/configuration.controller.js',
+        'scripts/app/admin/docs/docs.js',
+        'scripts/app/admin/health/health.js',
+        'scripts/app/admin/health/health.controller.js',
+        'scripts/app/admin/logs/logs.js',
+        'scripts/app/admin/logs/logs.controller.js',
+        'scripts/app/admin/metrics/metrics.js',
+        'scripts/app/admin/metrics/metrics.controller.js',
+        'scripts/app/entities/entity.js',
+        'scripts/app/error/error.js',
+        'scripts/app/main/main.js',
+        'scripts/app/main/main.controller.js'
+        ];
+    for(var i=0; i<appScripts.length; i++) {
+        str += '\n        <script src="'+appScripts[i]+'"></script>';
+    }
+
+//  if (this.authenticationType == 'xauth'){
+    str += "\n<% if(authenticationType == 'xauth') { %>";
+    str += '\n        <script src="scripts/components/auth/provider/auth.xauth.service.js"></script>';
+    str += "\n<% } %>";
+//  }
+
+//  if (this.authenticationType == 'oauth2') {
+    str += "\n<% if(authenticationType == 'oauth2') { %>";
+    str += '\n        <script src="scripts/components/auth/provider/auth.oauth2.service.js"></script>';
+    str += "\n<% } %>";
+//  }
+
+//  if (this.authenticationType == 'session'){
+    str += "\n<% if(authenticationType == 'session') { %>";
+    str += '\n        <script src="scripts/components/auth/services/sessions.service.js"></script>';
+    str += '\n        <script src="scripts/components/auth/provider/auth.session.service.js"></script>';
+    str += '\n        <script src="scripts/app/account/sessions/sessions.js"></script>';
+    str += '\n        <script src="scripts/app/account/sessions/sessions.controller.js"></script>';
+    str += "\n<% } %>";
+//  }
+
+//  if (this.websocket == 'spring-websocket') {
+    str += "\n<% if(websocket == 'spring-websocket') { %>";
+    str += '\n        <script src="scripts/app/admin/tracker/tracker.js"></script>';
+    str += '\n        <script src="scripts/app/admin/tracker/tracker.controller.js"></script>';
+    str += '\n        <script src="scripts/components/tracker/tracker.service.js"></script>';
+    str += "\n<% } %>";
+//  }
+
+    str += '\n        <!-- endbuild -->\n\n';
+
+    data = 
+      data.substring(0,data.indexOf('    </body>'))
+      + str
+      + data.substring(data.indexOf('    </body>'));
+
+    write(src, outfile, data);
 }
